@@ -1,0 +1,45 @@
+<div class="transaction-details" *ngIf="transaction">
+  <h2>Detalhes da Transação</h2>
+
+  <div class="transaction-field">
+    <strong>Descrição:</strong>
+    <span>{{ transaction.description }}</span>
+  </div>
+
+  <div class="transaction-field">
+    <strong>Valor:</strong>
+    <span [ngStyle]="{ color: transaction.amount > 0 ? 'green' : 'red' }">{{ transaction.amount | currency:'BRL' }}</span>
+  </div>
+
+  <div class="transaction-field">
+    <strong>Data:</strong>
+    <span>{{ transaction.date | date:'dd/MM/yyyy' }}</span>
+  </div>
+
+  <div class="transaction-field">
+    <strong>Tipo:</strong>
+    <span>{{ translateType() }}</span>
+  </div>
+
+  <div *ngIf="category" class="transaction-field">
+    <strong>Categoria:</strong>
+    <span>{{ category.name }}</span>
+  </div>
+
+  <div class="actions-column">
+    <div class="cancel-btn-box">
+      <button (click)="cancel()" class="btn-cancel">
+        Voltar
+      </button>
+    </div>
+    <div class="action-btn-group">
+      <button [routerLink]="['/transaction/edit', transaction.id]" class="btn-edit">
+        Editar
+      </button>
+      <button (click)="deleteTransaction(transaction.id)" class="btn-delete">
+        Deletar
+      </button>
+    </div>
+  </div>
+
+</div>

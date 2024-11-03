@@ -1,0 +1,76 @@
+<div class="new-transaction">
+  <h2>Editar Transação</h2>
+  <form (ngSubmit)="editTransaction()" #transactionForm="ngForm">
+    <div>
+      <label for="description">Descrição:</label>
+      <input type="text" id="description" required [(ngModel)]="transaction.description" name="description" />
+      <div *ngIf="errorMessages['description'] && errorMessages['description'].length > 0" class="error-message">
+        <p *ngFor="let error of errorMessages['description']">{{ error }}</p>
+      </div>
+    </div>
+
+    <div>
+      <label for="amount">Valor:</label>
+      <input type="number" id="amount" required [(ngModel)]="transaction.amount" name="amount" step="0.01" />
+      <div *ngIf="errorMessages['amount'] && errorMessages['amount'].length > 0" class="error-message">
+        <p *ngFor="let error of errorMessages['amount']">{{ error }}</p>
+      </div>
+    </div>
+
+    <div>
+      <label for="category">Selecione ou Crie uma Categoria:</label>
+      <div>
+        <label>
+          <input type="radio" name="categoryOption" [(ngModel)]="isNewCategory" [value]="false" (change)="onCategoryChange()" /> Selecionar Categoria Existente
+        </label>
+        <label>
+          <input type="radio" name="categoryOption" [(ngModel)]="isNewCategory" [value]="true" (change)="onCategoryChange()" /> Criar Nova Categoria
+        </label>
+        <label>
+          <input type="radio" name="categoryOption" [(ngModel)]="isNewCategory" [value]="null" (change)="onCategoryChange()" /> Sem Categoria
+        </label>
+      </div>
+
+      <select id="category" [disabled]="isNewCategory === null" *ngIf="isNewCategory === false" [(ngModel)]="selectedCategory" name="category">
+        <option value="" disabled>Selecione uma categoria</option>
+        <option *ngFor="let category of categories" [value]="category.id">{{ category.name }}</option>
+      </select>
+
+      <input type="text" id="newCategory" *ngIf="isNewCategory" [(ngModel)]="newCategoryName" name="newCategory" placeholder="Digite o nome da nova categoria" required />
+      <div *ngIf="categoryErrors.name.length > 0" class="error-message">
+        <p *ngFor="let error of categoryErrors.name">{{ error }}</p>
+      </div>
+    </div>
+
+    <div>
+      <label for="type">Tipo:</label>
+      <select id="type" required [(ngModel)]="transaction.type" name="type" (change)="onTypeChange()">
+        <option value="income">Renda</option>
+        <option value="expense">Despesa</option>
+      </select>
+      <div *ngIf="errorMessages['type'] && errorMessages['type'].length > 0" class="error-message">
+        <p *ngFor="let error of errorMessages['type']">{{ error }}</p>
+      </div>
+    </div>
+
+    <div>
+      <label for="date">Data:</label>
+      <input type="date" required id="date" [(ngModel)]="transaction.date" name="date" />
+      <div *ngIf="errorMessages['date'] && errorMessages['date'].length > 0" class="error-message">
+        <p *ngFor="let error of errorMessages['date']">{{ error }}</p>
+      </div>
+    </div>
+
+    <div class="button-container">
+
+      <div class="button-container cancel-container">
+        <button type="button" (click)="cancel()" class="cancel-btn">Cancelar</button>
+      </div>
+
+      <div class="button-container submit-container">
+        <button class="submit-btn" type="submit" [disabled]="!transactionForm.valid">Adicionar Transação</button>
+      </div>
+    </div>
+
+  </form>
+</div>

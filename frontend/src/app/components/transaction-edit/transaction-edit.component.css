@@ -1,0 +1,78 @@
+.new-transaction {
+  width: 80%;
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.new-transaction h2 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.new-transaction label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.new-transaction input[type="text"],
+.new-transaction input[type="number"],
+.new-transaction input[type="date"],
+.new-transaction select {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+.button-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+  margin-left: 6px;
+}
+
+.cancel-btn {
+  background-color: rgb(255, 0, 0);
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.new-transaction .submit-btn {
+  background-color: #1885fa;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 15px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.submit-btn:hover {
+  background-color: #1943fd;
+}
+
+.new-transaction .submit-btn:disabled {
+  background-color: #e0e0e0;
+  cursor: not-allowed;
+  color: #a0a0a0;
+}
+
+@media (max-width: 768px) {
+  .new-transaction {
+    width: 95%;
+  }
+}

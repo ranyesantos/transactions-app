@@ -1,0 +1,69 @@
+<div class="transaction-list">
+  <div class="header">
+    <div class="header-box">
+      <h2>Lista de Transações</h2>
+      <button class="add-transaction-button" routerLink="/transaction-new">
+        <span>Adicionar</span>
+      </button>
+    </div>
+    <div class="filter-box">
+      <label for="typeFilter">Filtrar por:</label>
+      <select id="type" [(ngModel)]="selectedType" (change)="onFiltersChanged()">
+        <option value="">Todos os tipos</option>
+        <option value="income">Renda</option>
+        <option value="expense">Despesa</option>
+      </select>
+    </div>
+  </div>
+  <hr>
+
+  <div *ngIf="transactions && transactions.length > 0; else noData">
+    <div class="table-responsive">
+      <table>
+        <thead>
+          <tr>
+            <th>Descrição</th>
+            <th>Valor</th>
+            <th class="category-column">Categoria</th>
+            <th class="date-column">Data</th>
+            <th class="actions-column">Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let transaction of transactions" [routerLink]="['/transaction', transaction.id]" class="clickable-row">
+            <td class="truncate">{{ transaction.description }}</td>
+            <td [ngStyle]="{ color: transaction.amount > 0 ? 'green' : 'red' }">
+              {{ transaction.amount | currency:'BRL' }}
+            </td>
+            <td class="category-column">{{ getCategoryNameById(transaction.category_id) }}</td>
+            <td class="date-column">{{ transaction.date | date:'dd/MM/yyyy' }}</td>
+            <td class="actions-column">
+              <div class="button-group">
+                <button [routerLink]="['/transaction/edit', transaction.id]" class="btn-edit">
+                  Editar
+                </button>
+                <button (click)="deleteTransaction(transaction.id); $event.stopPropagation()" class="btn-delete">
+                  Deletar
+                </button>
+              </div>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+
+    </div>
+
+  </div>
+
+  <ng-template #noData>
+    <div class="no-data-message">
+      <p>Não há nenhuma transação registrada</p>
+    </div>
+  </ng-template>
+
+  <div class="pagination" *ngIf="transactions && transactions.length > 0">
+    <button (click)="pageChanged(currentPage - 1)" [disabled]="currentPage === 1">Anterior</button>
+    <span>Página {{ currentPage }} de {{ totalPages }}</span>
+    <button (click)="pageChanged(currentPage + 1)" [disabled]="currentPage === totalPages">Próximo</button>
+  </div>
+</div>
