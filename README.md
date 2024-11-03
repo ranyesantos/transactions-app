@@ -22,10 +22,10 @@
 5. 🔧 [Services](#services)
    - [Classe: TransactionService](#classe-transactionservice)
        - [Métodos](#métodos)
-         - [`getTransactions(Request $request): LengthAwarePaginator`](#getTransactions)
-         - [`createTransaction(array $data): Transaction`](#createTransaction)
-         - [`updateTransaction(Transaction $transaction, array $data): Transaction`](#updateTransaction)
-         - [`adjustAmount(float $amount, string $type): float`](#adjustAmount)
+         - [getTransactions](#gettransactionsrequest-request-lengthawarepaginator)
+         - [createTransaction](#createtransactionarray-data-transaction)
+         - [updateTransaction](#updatetransactiontransaction-transaction-array-data-transaction)
+         - [adjustAmount](#adjustamountfloat-amount-string-type-float)
 
 
 <h1>📋 Pré-requisitos</h1>
@@ -479,7 +479,7 @@ Front-end
 
 <h3 id="métodos" >Métodos:</h3>
 
-<h3 id="getTransactions">`getTransactions(Request $request): LengthAwarePaginator`</h3>
+## `getTransactions(Request $request): LengthAwarePaginator`
 
 Obtém uma lista paginada de transações financeiras, permitindo filtrar os resultados com base nos parâmetros fornecidos na solicitação HTTP.
 
@@ -513,7 +513,7 @@ $transactions = $transactionService->getTransactions($request);
 
 <br>
 
-<h3 id="createTransaction">`createTransaction(array $data): Transaction`</h3>
+## `createTransaction(array $data): Transaction`
 
 Cria uma transação financeira ajustando o valor conforme o tipo especificado (receita ou despesa). 
 
@@ -552,7 +552,7 @@ $transaction = $transactionService->createTransaction($data);
 
 <br>
 
-<h3 id="updateTransaction">`updateTransaction(Transaction $transaction, array $data): Transaction`</h3>
+## `updateTransaction(Transaction $transaction, array $data): Transaction`
 
 Atualiza uma transação existente com novos dados.
 
@@ -593,7 +593,7 @@ $updatedTransaction = $transactionService->updateTransaction($existingTransactio
 
 <br>
 
-<h3 id="adjustAmount">`adjustAmount(float $amount, string $type): float`</h3>
+## `adjustAmount(float $amount, string $type): float`
 Método privado que ajusta o valor da transação baseado no tipo, tornando negativo para despesas.
 
 **Parâmetros:**
