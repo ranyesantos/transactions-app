@@ -107,7 +107,7 @@
     ```
 <br>
 
-Front-end
+<h2>Front-end</h2>
 
 1. **Selecionar diretório**
    
