@@ -2274,5 +2274,3 @@ constructor(private http: HttpClient) { }
 - **Retorno**: Um `Observable` que emitirá a categoria correspondente ao ID fornecido.
 
 ---
-=======
->>>>>>> b66e6a49c0f1d8b6fd020a10a6bb4439cce99531
