@@ -22,8 +22,11 @@ class TransactionService
     {
         $query = Transaction::query();
 
-        if ($request->has('type') && $request->input('type') !== null) {
+        if ($request->has('type') && $request->input('type') != null) {
             $query->where('type', $request->input('type'));
+        }
+        if ($request->type === null){
+            $query = Transaction::query();
         }
 
         return $query->paginate(perPage: 15);
