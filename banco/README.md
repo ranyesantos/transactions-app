@@ -2,13 +2,6 @@
 
 Este documento fornece instruções sobre como criar as tabelas `transactions` e `categories` no banco de dados.
 
-## Pré-requisitos
-
-Antes de executar os scripts, certifique-se de que você tenha:
-
-- Um servidor de banco de dados SQL em funcionamento.
-- Permissões necessárias para criar tabelas no banco de dados.
-
 ## Passos para Criar as Tabelas
 
 ### 1. Conectar ao Banco de Dados
