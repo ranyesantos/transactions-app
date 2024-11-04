@@ -238,7 +238,7 @@
     ```
 <br>
 
-Front-end
+<h2>Front-end</h2>
 
 1. **Selecionar diretório**
    
@@ -707,6 +707,7 @@ Método privado que ajusta o valor da transação baseado no tipo, tornando nega
 ```php
 $adjustedAmount = $this->adjustAmount(100.00, 'expense'); // Retorna -100.00
 $adjustedAmount = $this->adjustAmount(100.00, 'income');  // Retorna 100.00
+<<<<<<< HEAD
 ```
 <br>
 
@@ -2266,3 +2267,5 @@ constructor(private http: HttpClient) { }
 - **Retorno**: Um `Observable` que emitirá a categoria correspondente ao ID fornecido.
 
 ---
+=======
+>>>>>>> b66e6a49c0f1d8b6fd020a10a6bb4439cce99531
