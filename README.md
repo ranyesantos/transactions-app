@@ -2,6 +2,10 @@
 # Sumário
 
 - [Sumário](#sumário)
+- [Pré-requisitos](#pré-requisitos)
+- [Como rodar](#como-rodar)
+  - [Back-end](#back-end)
+  - [Front-end](#front-end)
 - [API](#api)
   - [🗄️ Tabelas do banco de dados](#️-tabelas-do-banco-de-dados)
     - [Transactions](#transactions)
@@ -25,7 +29,7 @@
       - [`createTransaction(array $data): Transaction`](#createtransactionarray-data-transaction)
       - [`updateTransaction(Transaction $transaction, array $data): Transaction`](#updatetransactiontransaction-transaction-array-data-transaction)
       - [`adjustAmount(float $amount, string $type): float`](#adjustamountfloat-amount-string-type-float)
-- [Front-end](#front-end)
+- [Front-end](#front-end-1)
   - [Rotas](#rotas)
     - [Descrição das Rotas](#descrição-das-rotas)
       - [1. Rota Padrão (Home)](#1-rota-padrão-home)
@@ -147,7 +151,7 @@
       - [Propriedades](#propriedades-6)
         - [`private apiUrl: string`](#private-apiurl-string-1)
       - [Construtor](#construtor-6)
-      - [Métodos](#métodos-1)
+      - [Metodos](#metodos-6)
         - [`getCategories(): Observable<Category[]>`](#getcategories-observablecategory)
         - [`addCategory(name: string): Observable<{ category: Category; message: string }>`](#addcategoryname-string-observable-category-category-message-string-)
         - [`getCategoryById(id: number): Observable<Category>`](#getcategorybyidid-number-observablecategory)
@@ -159,16 +163,16 @@
 ---
 <br>
 
-<h1>📋 Pré-requisitos</h1>
+# Pré-requisitos
 
 1. **PHP** Versão: >= 8.2
 2. **Composer**
 3. **Node.js**
 4. **Angular CLI**
 
-<h1>▶️ Como rodar</h1>
+# Como rodar
 
-<h2>Back-end</h2>
+## Back-end
 <br>
 
 1. **Clonar o Repositório do GitHub**
@@ -232,32 +236,37 @@
 
 7. **Iniciar o Servidor de Desenvolvimento**
 
-    Para iniciar o servidor embutido do Laravel, execute o comando:
+    Para iniciar o servidor do Laravel, execute o comando:
     ```sh
     php artisan serve
     ```
 <br>
 
-<h2>Front-end</h2>
+## Front-end
 
 1. **Selecionar diretório**
    
-   Se estiver no diretório de back-end, abra o terminal e execute:
+    Em um novo terminal, selecione o diretório frontend executando o comando:
 
     ```sh
-    cd ../frontend
+    cd transactions-app/frontend
     ```
-    Se estiver no diretório raiz, execute:
+    ou
     ```sh
     cd frontend
     ```
+
 2. **Instalar dependências**
 
     Com o diretório selecionado, execute no terminal:
+
     ```sh
     npm install
     ```
+
 3. **Iniciar o Servidor de Desenvolvimento**
+
+    Para iniciar o servidor do angular, execute o comando:
 
     ```sh
     ng serve
@@ -2007,10 +2016,9 @@ fetchCategory(id: number): void {
 
 ---
 
+
 <br>
 
-
----
 
 ## Services 
 
@@ -2177,7 +2185,7 @@ constructor(private http: HttpClient) {}
 
 #### Descrição
 
-O `CategoryService` é um serviço Angular que fornece métodos para interagir com a API de categorias. Ele permite realizar operações como listar, adicionar e buscar detalhes de categorias. O serviço utiliza o `HttpClient` para fazer requisições HTTP ao servidor da API.
+O `CategoryService` é um serviço que fornece métodos para interagir com os endpoints de categoria. Ele permite realizar operações como listar, adicionar e buscar detalhes de categorias. O serviço utiliza o `HttpClient` para fazer requisições HTTP ao servidor da API.
 
 #### Importações
 
@@ -2237,9 +2245,8 @@ constructor(private http: HttpClient) { }
 
 ---
 
-#### Métodos
+#### Metodos
 
-<br>
 
 ##### `getCategories(): Observable<Category[]>`
 
