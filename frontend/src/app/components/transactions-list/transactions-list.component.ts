@@ -56,7 +56,7 @@ export class TransactionsListComponent implements OnInit {
 
   onFiltersChanged(): void {
     const filters = {
-      type: this.selectedType || null,
+      type: this.selectedType,
     };
     this.fetchTransactions(this.currentPage, filters);
   }
