@@ -12,7 +12,7 @@ export interface Category {
 })
 
 export class CategoryService {
-  private apiUrl = 'http://127.0.0.1:8000/api';
+  private apiUrl = 'http://localhost:8080/api';
 
   constructor(private http: HttpClient) { }
 
@@ -23,7 +23,7 @@ export class CategoryService {
   addCategory(name: string): Observable<{ category: Category; message: string }> {
     return this.http.post<{ category: Category; message: string }>(`${this.apiUrl}/categories`, { name });
   }
-  
+
   getCategoryById(id: number): Observable<Category> {
     return this.http.get<Category>(`${this.apiUrl}/categories/${id}`);
   }

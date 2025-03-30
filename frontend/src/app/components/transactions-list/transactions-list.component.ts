@@ -30,67 +30,14 @@ export class TransactionsListComponent implements OnInit {
   }
 
   fetchTransactions(page: number = 1, filters?: any): void {
-  // Check if filters or page number are provided and mock data if needed.
-  this.transactionsService.getTransactions(page, filters).subscribe({
-    next: (data) => {
-      this.transactions = data.data;
-      this.totalPages = data.last_page;
-      this.currentPage = data.current_page;
+    this.transactionsService.getTransactions(page, filters).subscribe({
+      next: (data) => {
+        this.transactions = data.data;
+        this.totalPages = data.last_page;
+        this.currentPage = data.current_page;
     },
-    error: () => {
-      // Fallback to mock data in case of error or during testing
-      this.transactions = this.getMockTransactions();
-      this.totalPages = 1;
-      this.currentPage = 1;
-    },
-  });
-}
-
-// Mock function to return fake data
-getMockTransactions(): Transaction[] {
-  return [
-    {
-      id: 1,
-      description: 'Sample Transaction 1',
-      category_id: 2,
-      amount: 150.5,
-      type: 'debit',
-      date: '2025-03-29',
-    },
-    {
-      id: 2,
-      description: 'Sample Transaction 2',
-      category_id: 1,
-      amount: 99.99,
-      type: 'credit',
-      date: '2025-03-28',
-    },
-    {
-      id: 3,
-      description: 'Sample Transaction 3',
-      category_id: 3,
-      amount: 200.0,
-      type: 'debit',
-      date: '2025-03-27',
-    },
-    {
-      id: 4,
-      description: 'Sample Transaction 4',
-      category_id: 4,
-      amount: 500.0,
-      type: 'credit',
-      date: '2025-03-26',
-    },
-    {
-      id: 5,
-      description: 'Sample Transaction 5',
-      category_id: null,
-      amount: 75.75,
-      type: 'debit',
-      date: '2025-03-25',
-    },
-  ];
-}
+    });
+  }
 
   editTransaction(id: number): void {
     this.router.navigate(['/transaction/:id', id]);

@@ -17,6 +17,8 @@ services:
     volumes:
       - ./frontend:/app
       - /app/node_modules
+    networks:
+      - backend-network
       
   php:
     build:
@@ -32,11 +34,8 @@ services:
     container_name: mysql-db
     ports:
       - "3307:3306"
-    environment:
-      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
-      MYSQL_DATABASE: ${DB_DATABASE}
-      MYSQL_USER: ${DB_USERNAME}
-      MYSQL_PASSWORD: ${DB_PASSWORD}
+    env_file:
+      - ./backend/.env
     volumes:
       - db-data:/var/lib/mysql
     networks:

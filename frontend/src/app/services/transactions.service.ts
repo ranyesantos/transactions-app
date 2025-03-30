@@ -22,13 +22,13 @@ export interface PaginatedResponse {
   providedIn: 'root'
 })
 export class TransactionsService {
-  private apiUrl = 'http://127.0.0.1:8000/api';
+  private apiUrl = 'http://localhost:8080/api';
 
   constructor(private http: HttpClient) {}
 
-  getTransactions(page: number, filters?: any): Observable<PaginatedResponse> {
+  getTransactions(page: number, filters?: any): Observable<any> {
     const params: any = { page, ...filters };
-    return this.http.get<PaginatedResponse>(`${this.apiUrl}/transactions`, { params });
+    return this.http.get(`${this.apiUrl}/transactions`, { params });
   }
 
   addTransaction(transaction: Transaction): Observable<Transaction> {
