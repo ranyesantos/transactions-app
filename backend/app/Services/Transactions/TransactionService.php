@@ -2,6 +2,7 @@
 
 namespace App\Services\Transactions;
 
+use App\DTO\TransactionDTO;
 use Illuminate\Http\Request;
 use App\Models\Transaction;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
@@ -40,20 +41,18 @@ class TransactionService
      * com base no tipo da transação ('income' ou 'expense') e depois
      * cria uma nova instância de Transaction com os dados fornecidos.
      *
-     * @param array $data Um array contendo os dados da transação, que devem incluir:
      *                    - 'description': descrição da transação
      *                    - 'category_id': ID da categoria associada
      *                    - 'amount': valor da transação
      *                    - 'type': tipo da transação ('income' ou 'expense')
      *                    - 'date': data da transação
      *
-     * @return Transaction a nova instância de Transaction criada no banco de dados.
     */
-    public function createTransaction(array $data): Transaction
+    public function createTransaction(TransactionDTO $data)
     {
-        $data['amount'] = $this->adjustAmount(amount: $data['amount'], type: $data['type']);
+        Transaction::create($data->toArray());
 
-        return Transaction::create($data);
+        return $data;
     }
 
     /**
@@ -64,41 +63,15 @@ class TransactionService
      * depois atualiza a instância da transação com os dados fornecidos
      * e retorna a transação atualizada.
      *
-     * @param Transaction $transaction A instância da transação a ser atualizada.
-     *
-     * @param array $data Os dados que devem ser atualizados na transação.
      *
      * @return Transaction retorna a instância da transação atualizada.
     */
-    public function updateTransaction(Transaction $transaction, array $data): Transaction
+    public function updateTransaction(Transaction $transaction, TransactionDTO $data): Transaction
     {
-        $data['amount'] = $this->adjustAmount(amount: $data['amount'], type: $data['type']);
-
-        $transaction->update($data);
+        $transaction->update($data->toArray());
 
         return $transaction;
     }
-
-    /**
-     * Ajusta o valor de uma transação com base no seu tipo.
-     *
-     * Este método garante que o valor retornado seja para transações do tipo
-     * 'expense' (despesa) e positivo para transações do tipo 'income' (renda).
-     *
-     * @param float $amount O valor a ser ajustado.
-     * @param string $type O tipo da transação, deve ser 'income' ou 'expense'.
-     *
-     * @return float Retorna o valor ajustado: negativo para despesas e positivo para rendas.
-     */
-    private function adjustAmount(float $amount, string $type): float
-    {
-        if ($type === 'expense') {
-            return -abs(num: $amount);
-        }
-
-        return abs(num: $amount);
-    }
-
 
 }
 

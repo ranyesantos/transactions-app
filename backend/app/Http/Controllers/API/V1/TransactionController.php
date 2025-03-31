@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\API\v1;
 
+use App\DTO\TransactionDTO;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\TransactionRequest;
 use App\Models\Transaction;
@@ -15,7 +16,9 @@ class TransactionController extends Controller
 
     private $transactionService;
 
-    public function __construct(TransactionService $transactionService)
+    public function __construct(
+        TransactionService $transactionService,
+    )
     {
         $this->transactionService = $transactionService;
     }
@@ -32,9 +35,7 @@ class TransactionController extends Controller
     public function index(Request $request): JsonResponse
     {
         $transactions = $this->transactionService->getTransactions(request: $request);
-
         return response()->json(data: $transactions,  status: Response::HTTP_OK);
-
     }
 
 
@@ -42,7 +43,13 @@ class TransactionController extends Controller
      * Armazena uma nova transação no sistema.
      *
      * Este método recebe uma requisição que contém os dados validados
-     * da transação. Ele cria uma nova transação usando o serviço
+     * da transação.
+     *
+     * TransactionDTO é instanciado para novamente validar e fazer o ajuste do campo 'amount' (quantidade) de acordo com o campo 'type'
+     *      - se o campo 'type' tiver o valor de 'expense', o valor em 'amount' será convertido para negativo
+     *      - se for 'income', o valor será convertido para positivo
+     *
+     * cria uma nova transação usando o serviço
      * de transação e retorna uma resposta JSON com a nova transaçao e uma confirmação.
      *
      * @param TransactionRequest $request A requisição contendo os dados da transação. Os dados são validados através da classe TransactionRequest.
@@ -54,13 +61,13 @@ class TransactionController extends Controller
      */
     public function store(TransactionRequest $request): JsonResponse
     {
-        $transaction = $this->transactionService->createTransaction(data: $request->validated());
+        $transactionDTO = new TransactionDTO(...$request->validated());
+        $transaction = $this->transactionService->createTransaction(data: $transactionDTO);
 
         return response()->json(data: [
             'transaction' => $transaction,
             'message' => 'Transação adicionada com sucesso',
         ], status: Response::HTTP_CREATED);
-
     }
 
 
@@ -98,13 +105,13 @@ class TransactionController extends Controller
     */
     public function update(TransactionRequest $request, Transaction $transaction): JsonResponse
     {
-        $transaction = $this->transactionService->updateTransaction( transaction: $transaction,  data: $request->validated());
+        $transactionDTO = new TransactionDTO(...$request->validated());
+        $transaction = $this->transactionService->updateTransaction(transaction: $transaction,  data: $transactionDTO);
 
         return response()->json(data: [
             'transaction' => $transaction,
             'message'=> 'Transação editada com sucesso',
         ],status: Response::HTTP_OK);
-
     }
 
     /**
