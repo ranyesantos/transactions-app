@@ -4,13 +4,11 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use App\Models\Transaction;
-use Illuminate\Support\Facades\DB;
 
 class TransactionSeeder extends Seeder
 {
     public function run()
     {
-        DB::table('transactions')->truncate(); // Limpa a tabela antes de inserir novos dados
 
         Transaction::insert([
             [
@@ -25,7 +23,7 @@ class TransactionSeeder extends Seeder
             [
                 'description' => 'Conta de Luz',
                 'category_id' => 2,
-                'amount' => 150.75,
+                'amount' => -150.75,
                 'type' => 'expense',
                 'date' => now()->subDays(5),
                 'created_at' => now(),
@@ -34,7 +32,7 @@ class TransactionSeeder extends Seeder
             [
                 'description' => 'Almoço no Restaurante',
                 'category_id' => 3,
-                'amount' => 50.00,
+                'amount' => -50.00,
                 'type' => 'expense',
                 'date' => now()->subDays(2),
                 'created_at' => now(),
@@ -52,7 +50,7 @@ class TransactionSeeder extends Seeder
             [
                 'description' => 'Compra de Material de Escritório',
                 'category_id' => 4,
-                'amount' => 200.00,
+                'amount' => -200.00,
                 'type' => 'expense',
                 'date' => now()->subDays(8),
                 'created_at' => now(),
@@ -61,7 +59,7 @@ class TransactionSeeder extends Seeder
             [
                 'description' => 'Pagamento de Internet',
                 'category_id' => 2,
-                'amount' => 120.00,
+                'amount' => -120.00,
                 'type' => 'expense',
                 'date' => now()->subDays(7),
                 'created_at' => now(),
@@ -79,7 +77,7 @@ class TransactionSeeder extends Seeder
             [
                 'description' => 'Assinatura de Software',
                 'category_id' => 5,
-                'amount' => 99.99,
+                'amount' => -99.99,
                 'type' => 'expense',
                 'date' => now()->subDays(1),
                 'created_at' => now(),
@@ -97,7 +95,7 @@ class TransactionSeeder extends Seeder
             [
                 'description' => 'Aluguel Escritório',
                 'category_id' => 2,
-                'amount' => 1500.00,
+                'amount' => -1500.00,
                 'type' => 'expense',
                 'date' => now()->subDays(9),
                 'created_at' => now(),
@@ -106,7 +104,7 @@ class TransactionSeeder extends Seeder
             [
                 'description' => 'Despesas Médicas',
                 'category_id' => 6,
-                'amount' => 250.00,
+                'amount' => -250.00,
                 'type' => 'expense',
                 'date' => now()->subDays(4),
                 'created_at' => now(),
@@ -124,7 +122,7 @@ class TransactionSeeder extends Seeder
             [
                 'description' => 'Compra de Equipamento de Informática',
                 'category_id' => 7,
-                'amount' => 800.00,
+                'amount' => -800.00,
                 'type' => 'expense',
                 'date' => now()->subDays(11),
                 'created_at' => now(),
@@ -138,7 +136,7 @@ class TransactionSeeder extends Seeder
                 'date' => now()->subDays(13),
                 'created_at' => now(),
                 'updated_at' => now(),
-            ],
+            ]
         ]);
     }
 }
