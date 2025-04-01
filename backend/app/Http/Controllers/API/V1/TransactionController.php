@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API\v1;
 
 use App\DTO\TransactionDTO;
+use App\Enums\TransactionType;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\TransactionRequest;
 use App\Models\Transaction;

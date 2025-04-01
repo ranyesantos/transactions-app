@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Enums\TransactionType;
 use Illuminate\Foundation\Http\FormRequest;
 
 class TransactionRequest extends FormRequest
@@ -12,6 +13,20 @@ class TransactionRequest extends FormRequest
     public function authorize(): bool
     {
         return true;
+    }
+
+    /**
+    * Convert type string to TransactionType enum after validation.
+    */
+    public function validated($key = null, $default = null)
+    {
+        $validated = parent::validated();
+
+        if (isset($validated['type'])) {
+            $validated['type'] = TransactionType::from($validated['type']);
+        }
+
+        return $key ? ($validated[$key] ?? $default) : $validated;
     }
 
     /**
@@ -48,7 +63,7 @@ class TransactionRequest extends FormRequest
 
             'date.string' => 'O campo data deve ser uma string.',
             'date.required' => 'O campo data é obrigatório.',
-        ];
+            ];
     }
 
 }
